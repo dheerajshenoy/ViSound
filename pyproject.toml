@@ -1,6 +1,6 @@
 [project]
 name = "ViSound"
-version = "0.1.1"
+version = "0.1.2"
 description = "A library to sonify images using Python"
 authors = [{ name = "Dheeraj Vittal Shenoy", email = "dheerajshenoy22@email.com" }]
 dependencies = [
