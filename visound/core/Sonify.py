@@ -21,7 +21,7 @@ class Sonify:
         self.image = cv2.imread(self.file_path, cv2.IMREAD_GRAYSCALE)
 
         if self.image is None:
-            raise FileNotFoundError(f"Imafe file not found or unreadable: {self.file_path}")
+            raise FileNotFoundError(f"Image file not found or unreadable: {self.file_path}")
         self.image = cv2.resize(self.image, self.dim)
 
 
