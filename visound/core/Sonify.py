@@ -2,6 +2,8 @@ import numpy as np
 from typing import Optional, Tuple
 import cv2
 from visound.core.TraversalMode import TraversalMode
+import soundfile as sf
+import os
 
 class Sonify:
     def __init__(self,
@@ -10,7 +12,7 @@ class Sonify:
                  duration_per_column: Optional[float] = 0.01,
                  sample_rate: Optional[float] = 44100):
 
-        self.file_path = file_path
+        self.file_path = file_path.replace("~", os.getenv("HOME"))
         self.dim = dimension
         self.DPC = duration_per_column
         self.SR = sample_rate
@@ -23,7 +25,6 @@ class Sonify:
         if self.image is None:
             raise FileNotFoundError(f"Image file not found or unreadable: {self.file_path}")
         self.image = cv2.resize(self.image, self.dim)
-
 
     def pixel_to_freq(self, y: float, height: float) -> float:
         """
