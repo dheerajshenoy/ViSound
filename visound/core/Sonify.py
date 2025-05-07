@@ -25,34 +25,6 @@ class Sonify:
         self.image = cv2.resize(self.image, self.dim)
 
 
-
-        # from core.AudioController import AudioController
-        # self.audio_controller = AudioController()
-
-    # def GUI(self) -> None:
-    #     import sys
-    #     from PyQt6.QtWidgets import QApplication
-    #     from core.GUI import MainWindow
-
-    #     app = QApplication(sys.argv)
-    #     GUI = MainWindow()
-    #     GUI.set_traversal_mode(self.traversal_mode)
-    #     GUI.loadImage(self.image)
-    #     GUI.dpc = self.DPC
-    #     GUI.init_bar_position()
-    #     GUI.reset_signal.connect(self.reset)
-    #     GUI.pause_resume_signal.connect(self.pause_or_resume)
-    #     app.exec()
-
-    # def pause_or_resume(self, pause: bool) -> None:
-    #     if pause:
-    #         self.audio_controller.resume()
-    #     else:
-    #         self.audio_controller.pause()
-
-    # def reset(self) -> None:
-    #     self.audio_controller.reset()
-
     def pixel_to_freq(self, y: float, height: float) -> float:
         """
         Mapping function of pixel to frequency
