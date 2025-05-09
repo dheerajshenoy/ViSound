@@ -2,14 +2,23 @@
 
 Library to convert images to sounds.
 
+Refer to the wiki [here](WIKI.md)
+
 ## Introduction
 
 This is just a standalone library for use in other programs that can make use of `ViSound` capabilities. On it's own `ViSound` doesn't do anything. You have to use it in some way to get the output and play the audio yourself.
 
+## Installation
+
+ViSound can be installed using pip:
+
+    `pip install visound`
+
 ## Features
 
 * Sonify images in a number of different ways
-* Output the audio to a file
+* Output the audio to a file or stdout
+* Apply effects
 
 ## Traversal Modes
 
@@ -17,11 +26,24 @@ You can traverse the given input images in different ways to get different audio
 
 * Left To Right
 * Right to Left
+* Top to Bottom
+* Bottom to Top
+
+## Usage
+
+`visound <path to an image> --play --verbose`
+
+## Dependencies
 
 # TODO
 
 - [ ] Traversal
-  - [ ] Circular inward
-  - [ ] Circular outward
-- [ ] Apply effects to the output audio
+    - [X] Left to Right
+    - [X] Right to left
+    - [X] Top to bottom
+    - [X] Bottom to top
+    - [ ] Circular inward
+    - [ ] Circular outward
+- [X] Apply effects to the output audio
 - [ ] Allow for custom pixel to frequency mapping
+- [X] CLI client
