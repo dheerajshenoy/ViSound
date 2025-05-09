@@ -10,10 +10,10 @@ If you want to output to stdout specify with `-`.
 * `--verbose` shows detailed information about the audio generated
 * `--mode` image traversal mode. Defaults to **left to right**. It can be one of:
 
-    1. left_to_right
-    2. right_to_left
-    3. top_to_bottom
-    4. bottom_to_top
+    + left_to_right
+    + right_to_left
+    + top_to_bottom
+    + bottom_to_top
 
 * `--width` resize the input image to this width (default 256)
 * `--height` resize the input image to this height (default 256)
