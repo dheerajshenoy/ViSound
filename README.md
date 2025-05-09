@@ -12,7 +12,9 @@ This is just a standalone library for use in other programs that can make use of
 
 ViSound can be installed using pip:
 
-```pip install visound```
+```
+pip install visound
+```
 
 ## Features
 
