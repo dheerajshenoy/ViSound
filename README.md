@@ -30,6 +30,8 @@ You can traverse the given input images in different ways to get different audio
 * Right to Left
 * Top to Bottom
 * Bottom to Top
+* Circle Inward
+* Circle Outward
 
 ## Usage
 
@@ -37,15 +39,21 @@ You can traverse the given input images in different ways to get different audio
 
 ## Dependencies
 
+* numpy
+* opencv-python
+* sounddevice
+* soundfile
+
 # TODO
 
-- [ ] Traversal
+- [X] Traversal
     - [X] Left to Right
     - [X] Right to left
     - [X] Top to bottom
     - [X] Bottom to top
-    - [ ] Circular inward
-    - [ ] Circular outward
+    - [X] Circular inward
+    - [X] Circular outward
 - [X] Apply effects to the output audio
 - [ ] Allow for custom pixel to frequency mapping
 - [X] CLI client
+- [ ] Machine learning to apply effects and custom image traversal
