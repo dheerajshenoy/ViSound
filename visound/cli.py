@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import argparse
 from visound.core.TraversalMode import TraversalMode
 from visound.core.Sonify import Sonify
