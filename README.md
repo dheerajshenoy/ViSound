@@ -2,7 +2,7 @@
 
 Library to convert images to sounds.
 
-Refer to the wiki [here](WIKI.md)
+Refer to the wiki [here](https://github.com/dheerajshenoy/visound/WIKI.md)
 
 ## Introduction
 
