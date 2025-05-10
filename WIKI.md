@@ -19,3 +19,11 @@ If you want to output to stdout specify with `-`.
 * `--height` resize the input image to this height (default 256)
 * `--dpc` the duration per column in seconds. Higher the value longer the generated audio.
 * `--sample_rate` sampling rate of the audio
+
+## Example
+
+1. stdout the audio to play using something like `mpv` media player
+
+```
+visound
+```
