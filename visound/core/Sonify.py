@@ -136,7 +136,8 @@ class Sonify:
             for y in range(self._height):
                 intensity = column[y] / 255.0
                 if intensity > 0.1:
-                    freq = self.pixel_to_freq(y, self._height)
+                    freq = self.pixel_to_freq(y, x, self._height, self._width,
+                                              self._image)
                     column_sound += intensity * np.sin(2 * np.pi * freq * t_col)
 
             start = int(i * self._DPC * self._SR)
@@ -168,7 +169,8 @@ class Sonify:
             for x in range(0, self._width - 1):
                 intensity = row[y] / 255.0
                 if intensity > 0.1:
-                    freq = self.pixel_to_freq(y, self._height)
+                    freq = self.pixel_to_freq(y, x, self._height, self._width,
+                                              self._image)
                     row_sound += intensity * np.sin(2 * np.pi * freq * t_row)
 
             start = int(y * self._DPC * self._SR)
@@ -201,12 +203,106 @@ class Sonify:
             for x in range(0, self._width - 1):
                 intensity = row[y] / 255.0
                 if intensity > 0.1:
-                    freq = self.pixel_to_freq(y, self._height)
+                    freq = self.pixel_to_freq(y, x, self._height, self._width,
+                                              self._image)
                     row_sound += intensity * np.sin(2 * np.pi * freq * t_row)
 
             start = int(i * self._DPC * self._SR)
             end = start + len(t_row)
             sound[start:end] += row_sound
+
+        self._audio = sound
+
+        return sound
+
+    def CircleInward(self) -> np.ndarray:
+        """
+        Circle Inward image traversal:
+        Traverses the image in concentric circles from the outside towards the center.
+        Each ring is sonified by mapping pixel values to sound samples.
+        """
+
+        if self._image is None:
+            raise ValueError("No image loaded to sonify.")
+
+        self._traversal_mode = TraversalMode.CircleInward
+        center = (self._width // 2, self._height // 2)
+        max_radius = int(np.hypot(center[0], center[1]))
+        total_samples = int(max_radius * self._DPC * self._SR)
+        sound = np.zeros(total_samples)
+
+        for r in range(max_radius, 0, -1):
+            theta = np.linspace(0, 2 * np.pi, num=360, endpoint=False)
+            x = (center[0] + r * np.cos(theta)).astype(int)
+            y = (center[0] + r * np.sin(theta)).astype(int)
+
+            x = np.clip(x, 0, self._width - 1)
+            y = np.clip(y, 0, self._height - 1)
+
+            pixels = self._image[y, x]
+
+            # Sonify one circle: map intensities to waveform
+            samples_per_circle = int(self._DPC * self._SR)
+            t = np.linspace(0, self._DPC, samples_per_circle, endpoint=False)
+            freq = self.pixel_to_freq(y, x, self._height, self._width,
+                                      self._image)
+            waveform = np.sin(2 * np.pi * freq[:, None] * t).mean(axis=0)
+
+            # Insert waveform into the sound buffer
+            start_idx = int((max_radius - r) * self._DPC * self._SR)
+            end_idx = start_idx + samples_per_circle
+            if end_idx > total_samples:
+                end_idx = total_samples
+                waveform = waveform[:end_idx - start_idx]
+
+            sound[start_idx:end_idx] += waveform
+
+        self._audio = sound
+
+        return sound
+
+    def CircleOutward(self) -> np.ndarray:
+        """
+        Circle Outward image traversal:
+        Traverses the image in concentric circles from the center towards the edge
+        of the image.
+        Each ring is sonified by mapping pixel values to sound samples.
+        """
+
+        if self._image is None:
+            raise ValueError("No image loaded to sonify.")
+
+        self._traversal_mode = TraversalMode.CircleInward
+        center = (self._width // 2, self._height // 2)
+        max_radius = int(np.hypot(center[0], center[1]))
+        total_samples = int(max_radius * self._DPC * self._SR)
+        sound = np.zeros(total_samples)
+
+        for r in range(0, max_radius):
+            theta = np.linspace(0, 2 * np.pi, num=360, endpoint=False)
+            x = (center[0] + r * np.cos(theta)).astype(int)
+            y = (center[0] + r * np.sin(theta)).astype(int)
+
+            x = np.clip(x, 0, self._width - 1)
+            y = np.clip(y, 0, self._height - 1)
+
+            pixels = self._image[y, x]
+
+            # Sonify one circle: map intensities to waveform
+            samples_per_circle = int(self._DPC * self._SR)
+            t = np.linspace(0, self._DPC, samples_per_circle, endpoint=False)
+            freq = self.pixel_to_freq(y, x, self._height, self._width,
+                                      self._image)
+            waveform = np.sin(2 * np.pi * freq[:, None] * t).mean(axis=0)
+
+            # Insert waveform into the sound buffer
+            start_idx = int((max_radius - r) * self._DPC * self._SR)
+            end_idx = start_idx + samples_per_circle
+            if end_idx > total_samples:
+                end_idx = total_samples
+                waveform = waveform[:end_idx - start_idx]
+
+            sound[start_idx:end_idx] += waveform
 
         self._audio = sound
 
