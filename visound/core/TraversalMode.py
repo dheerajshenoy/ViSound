@@ -5,3 +5,5 @@ class TraversalMode(Enum):
     RightToLeft = 1,
     TopToBottom = 2,
     BottomToTop = 3,
+    CircleInward = 4,
+    CircleOutward = 5,
