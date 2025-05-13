@@ -20,6 +20,8 @@ def main():
                         "right_to_left",
                         "top_to_bottom",
                         "bottom_to_top",
+                        "circle_inward",
+                        "circle_outward"
                         ],
                         default="left_to_right",
                         help="Traversal Mode\n"
@@ -27,8 +29,11 @@ def main():
                         "left_to_right - Left to right\n"
                         "right_to_left - Right to left\n"
                         "top_to_bottom - Top to bottom\n"
-                        "bottom_to_top - Bottom to top\n")
-    parser.add_argument("--verbose", action="store_true", help="Detailed output")
+                        "bottom_to_top - Bottom to top\n"
+                        "circle_inward - Circle Inward\n"
+                        "circle_outward - Circle Outward\n")
+    parser.add_argument("--verbose", action="store_true",
+                        help="Detailed output")
 
     parser.add_argument("--output", type=str,
                         help="Path to the output file where the audio file should be saved")
@@ -56,6 +61,12 @@ def main():
 
         case "bottom_to_top":
             audio = sonify.BottomToTop()
+
+        case "circle_inward":
+            audio = sonify.CircleInward()
+
+        case "circle_outward":
+            audio = sonify.CircleOutward()
 
     if args.verbose:
         print(f"Duration of audio: {sonify.duration()} seconds")
