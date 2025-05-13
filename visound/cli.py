@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-from visound.core.TraversalMode import TraversalMode
-from visound.core.Sonify import Sonify
+from visound.core.sonify import Sonify
 import sounddevice as sd
 
 def main():

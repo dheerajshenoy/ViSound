@@ -72,12 +72,12 @@ class Sonify:
         """
         t = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
         tone = (
-            1.0 * np.sin(2 * np.pi * freq * t) +
+                1.0 * np.sin(2 * np.pi * freq * t) +
                 0.5 * np.sin(2 * np.pi * 2 * freq * t) +
                 0.3 * np.sin(2 * np.pi * 3 * freq * t) +
                 0.15 * np.sin(2 * np.pi * 4 * freq * t) +
                 0.05 * np.sin(2 * np.pi * 5 * freq * t)
-        )
+                )
         return amplitude * tone / np.max(np.abs(tone))  # normalize
 
     def LeftToRight(self) -> np.ndarray:
