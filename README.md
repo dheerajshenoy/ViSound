@@ -6,7 +6,11 @@ Refer to the wiki [here](https://github.com/dheerajshenoy/ViSound/blob/main/WIKI
 
 ## Introduction
 
-This is just a standalone library for use in other programs that can make use of `ViSound` capabilities. On it's own `ViSound` doesn't do anything. You have to use it in some way to get the output and play the audio yourself.
+This is just a standalone library for use in other programs that can make use of `ViSound` capabilities.
+On it's own `ViSound` doesn't do anything. You have to use it in some way to get the output and play the audio yourself.
+
+You can check out [sonify-python](https://github.com/dheerajshenoy/sonify-python) project to learn how to integrate
+ViSound into your program
 
 ## Installation
 
